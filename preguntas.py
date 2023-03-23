@@ -12,6 +12,32 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 
 """
 
+REL_PATH = "Python\lab---python-basico-sebasnop\data.csv"
+CLOUD_PATH = "lab---python-basico-sebasnop\data.csv"
+
+# Va a cambiar según donde se esté trabajando
+WORKING_ON_PC = False
+
+if WORKING_ON_PC:
+    DATA_PATH = REL_PATH
+else:
+    DATA_PATH = CLOUD_PATH
+
+def open_data(data_path: str) -> list:
+    """
+    Obtiene un archivo de un path dado
+    """
+    with open(data_path, "r", encoding="utf-8") as file:
+        data_opened = file.readlines()
+    return data_opened
+
+data = open_data(data_path=DATA_PATH)
+
+# Limpieza de "\n" (saltos de línea)
+data = [fila.replace("\n", "") for fila in data]
+
+# Conversión de los strings (filas) a listas
+data = [fila.split("\t") for fila in data]
 
 def pregunta_01():
     """
@@ -22,9 +48,9 @@ def pregunta_01():
 
     """
 
-    # Explorando
+    segunda_columna = [int(fila[1]) for fila in data]
 
-    return
+    return sum(segunda_columna)
 
 
 def pregunta_02():
@@ -261,3 +287,5 @@ def pregunta_12():
 
     """
     return
+
+pregunta_01()
