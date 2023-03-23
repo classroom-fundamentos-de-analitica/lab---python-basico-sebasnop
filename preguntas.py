@@ -12,6 +12,12 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 
 """
 
+# Para el conteo de elementos
+from collections import Counter
+
+# Para el ordenamiento de registros
+from operator import itemgetter
+
 REL_PATH = "Python\lab---python-basico-sebasnop\data.csv"
 CLOUD_PATH = "/home/runner/work/lab---python-basico-sebasnop/lab---python-basico-sebasnop/data.csv"
 
@@ -56,7 +62,7 @@ def pregunta_01():
 def pregunta_02():
     """
     Retorne la cantidad de registros por cada letra de la primera columna como la lista
-    de tuplas (letra, cantidad), ordendas alfabéticamente.
+    de tuplas (letra, cantidad), ordenadas alfabéticamente.
 
     Rta/
     [
@@ -68,7 +74,14 @@ def pregunta_02():
     ]
 
     """
-    return
+
+    primera_columna = [fila[0] for fila in data]
+    conteo = Counter(primera_columna)
+    conteo_lista = list(conteo.items())
+
+    sorted_conteo = sorted([fila for fila in conteo_lista], key=itemgetter(0))
+
+    return sorted_conteo
 
 
 def pregunta_03():
