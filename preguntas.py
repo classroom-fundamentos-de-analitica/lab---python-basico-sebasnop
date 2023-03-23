@@ -21,6 +21,9 @@ def pregunta_01():
     214
 
     """
+
+    # Explorando
+
     return
 
 
