@@ -13,7 +13,7 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 """
 
 REL_PATH = "Python\lab---python-basico-sebasnop\data.csv"
-CLOUD_PATH = "lab---python-basico-sebasnop\data.csv"
+CLOUD_PATH = "lab---python-basico-sebasnop/data.csv"
 
 # Va a cambiar según donde se esté trabajando
 WORKING_ON_PC = False
