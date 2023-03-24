@@ -116,11 +116,11 @@ def pregunta_03():
         else:
             diccionario_p3[clave] = [numero]
     
+    # Se asigna cada entrada del diccionario a donde debe estar
     for fila in columnas_1and2:
         agregar_diccionario_p3(fila)
 
     resultados = [(clave, sum(elementos)) for clave, elementos in diccionario_p3.items()]
-    
     sorted_resultados = sorted([tupla for tupla in resultados], key=itemgetter(0))
 
     return sorted_resultados
@@ -148,7 +148,18 @@ def pregunta_04():
     ]
 
     """
-    return
+
+    # Columna de fechas YYYY-MM-DD
+    columna_3 = [fila[2] for fila in data]
+    
+    meses = [fecha.split('-')[1] for fecha in columna_3]
+
+    conteo = Counter(meses)
+    conteo_lista = list(conteo.items())
+
+    sorted_conteo = sorted([fila for fila in conteo_lista], key=itemgetter(0))
+
+    return sorted_conteo
 
 
 def pregunta_05():
@@ -166,7 +177,32 @@ def pregunta_05():
     ]
 
     """
-    return
+
+    columnas_1and2 = [(fila[0], int(fila[1])) for fila in data]
+
+    # Tendrá la estructura "Letra": [max, min]
+    diccionario_p5 = {}
+
+    def verificar_diccionario_p5(tupla: tuple):
+        clave = tupla[0]
+        numero = tupla[1]
+
+        if clave in diccionario_p5:
+            max_actual, min_actual = diccionario_p5[clave]
+            if numero < min_actual:
+                diccionario_p5[clave][1] = numero
+            if numero > max_actual:
+                diccionario_p5[clave][0] = numero
+        else:
+            diccionario_p5[clave] = [numero, numero]
+    
+    for fila in columnas_1and2:
+        verificar_diccionario_p5(fila)
+
+    resultados = [(clave, elementos[0], elementos[1]) for clave, elementos in diccionario_p5.items()]
+    sorted_resultados = sorted([tupla for tupla in resultados], key=itemgetter(0))
+
+    return sorted_resultados
 
 
 def pregunta_06():
