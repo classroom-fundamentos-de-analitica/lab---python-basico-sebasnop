@@ -18,11 +18,14 @@ from collections import Counter
 # Para el ordenamiento de registros
 from operator import itemgetter
 
+# Para agrupar los elementos por el valor de una columna
+from itertools import groupby
+
 REL_PATH = "Python\lab---python-basico-sebasnop\data.csv"
 CLOUD_PATH = "/home/runner/work/lab---python-basico-sebasnop/lab---python-basico-sebasnop/data.csv"
 
 # Va a cambiar según donde se esté trabajando
-WORKING_ON_PC = False
+WORKING_ON_PC = True
 
 if WORKING_ON_PC:
     DATA_PATH = REL_PATH
@@ -87,7 +90,7 @@ def pregunta_02():
 def pregunta_03():
     """
     Retorne la suma de la columna 2 por cada letra de la primera columna como una lista
-    de tuplas (letra, suma) ordendas alfabeticamente.
+    de tuplas (letra, suma) ordenadas alfabeticamente.
 
     Rta/
     [
@@ -99,7 +102,28 @@ def pregunta_03():
     ]
 
     """
-    return
+
+    columnas_1and2 = [(fila[0], int(fila[1])) for fila in data]
+
+    diccionario_p3 = {}
+
+    def agregar_diccionario_p3(tupla: tuple):
+        clave = tupla[0]
+        numero = tupla[1]
+
+        if clave in diccionario_p3:
+            diccionario_p3[clave].append(numero)
+        else:
+            diccionario_p3[clave] = [numero]
+    
+    for fila in columnas_1and2:
+        agregar_diccionario_p3(fila)
+
+    resultados = [(clave, sum(elementos)) for clave, elementos in diccionario_p3.items()]
+    
+    sorted_resultados = sorted([tupla for tupla in resultados], key=itemgetter(0))
+
+    return sorted_resultados
 
 
 def pregunta_04():
