@@ -253,8 +253,6 @@ def pregunta_06():
     resultados = [(clave, elementos[0], elementos[1]) for clave, elementos in diccionario_p6.items()]
     sorted_resultados = sorted([tupla for tupla in resultados], key=itemgetter(0))
 
-    print(sorted_resultados)
-
     return sorted_resultados
 
 def pregunta_07():
@@ -317,7 +315,7 @@ def pregunta_08():
     ]
 
     """
-    return
+    return 0
 
 
 def pregunta_09():
@@ -340,7 +338,7 @@ def pregunta_09():
     }
 
     """
-    return
+    return 0
 
 
 def pregunta_10():
@@ -361,7 +359,7 @@ def pregunta_10():
 
 
     """
-    return
+    return 0
 
 
 def pregunta_11():
@@ -382,7 +380,7 @@ def pregunta_11():
 
 
     """
-    return
+    return 0
 
 
 def pregunta_12():
@@ -400,4 +398,4 @@ def pregunta_12():
     }
 
     """
-    return
+    return 0
