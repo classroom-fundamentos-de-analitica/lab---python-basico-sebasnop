@@ -25,7 +25,7 @@ REL_PATH = "Python\lab---python-basico-sebasnop\data.csv"
 CLOUD_PATH = "/home/runner/work/lab---python-basico-sebasnop/lab---python-basico-sebasnop/data.csv"
 
 # Va a cambiar según donde se esté trabajando
-WORKING_ON_PC = True
+WORKING_ON_PC = False
 
 if WORKING_ON_PC:
     DATA_PATH = REL_PATH
