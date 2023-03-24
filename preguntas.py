@@ -227,8 +227,35 @@ def pregunta_06():
     ]
 
     """
-    return
 
+    columna_5 = [fila[4] for fila in data]
+
+    # Obtiene los datos de forma ['jjj:12', 'bbb:3']
+    pares_sep = [fila.split(",") for fila in columna_5]
+
+    # Una fila estaba siendo ['jjj:12', 'bbb:3']
+    # Un par estaba siendo 'jjj:12'
+    key_value_sep = [(par.split(":")[0], int(par.split(":")[1])) for fila in pares_sep for par in fila]
+
+    # Tendrá la estructura "Letra": [min, max]
+    diccionario_p6 = {}
+
+    for letras, numero in key_value_sep:
+        if letras in diccionario_p6:
+            min_actual, max_actual = diccionario_p6[letras]
+            if numero < min_actual:
+                diccionario_p6[letras][0] = numero
+            if numero > max_actual:
+                diccionario_p6[letras][1] = numero
+        else:
+            diccionario_p6[letras] = [numero, numero]
+
+    resultados = [(clave, elementos[0], elementos[1]) for clave, elementos in diccionario_p6.items()]
+    sorted_resultados = sorted([tupla for tupla in resultados], key=itemgetter(0))
+
+    print(sorted_resultados)
+
+    return sorted_resultados
 
 def pregunta_07():
     """
@@ -251,7 +278,21 @@ def pregunta_07():
     ]
 
     """
-    return
+
+    columnas_2and1 = [(int(fila[1]), fila[0]) for fila in data]
+
+    diccionario = {}
+
+    for numero, letra in columnas_2and1:
+        if numero in diccionario:
+            diccionario[numero].append(letra)
+        else:
+            diccionario[numero] = [letra]
+
+    resultados = [(clave, elementos) for clave, elementos in diccionario.items()]
+    sorted_resultados = sorted([tupla for tupla in resultados], key=itemgetter(0))
+
+    return sorted_resultados
 
 
 def pregunta_08():
@@ -360,5 +401,3 @@ def pregunta_12():
 
     """
     return
-
-pregunta_01()
