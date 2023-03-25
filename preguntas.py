@@ -472,7 +472,7 @@ def pregunta_12():
         letra = fila[0]
         pares = fila[1]
 
-        numeros = [int(par.split(":")) for par in pares]
+        numeros = [int(par.split(":")[1]) for par in pares]
         suma = sum(numeros)
 
         if letra in diccionario:
@@ -483,3 +483,5 @@ def pregunta_12():
     sorted_diccionario = dict(sorted(diccionario.items()))
 
     return sorted_diccionario
+
+print(pregunta_12())
