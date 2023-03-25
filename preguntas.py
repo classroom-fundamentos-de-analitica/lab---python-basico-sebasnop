@@ -18,10 +18,12 @@ from collections import Counter
 # Para el ordenamiento de registros
 from operator import itemgetter
 
-# Para agrupar los elementos por el valor de una columna
-from itertools import groupby
+# Cuando se usa una 'r' delante de una cadena, indica que
+# la cadena se tratará como una cadena sin formato, lo que
+# significa que las barras invertidas se tratarán como
+# caracteres literales en lugar de caracteres de escape.
 
-REL_PATH = "Python\lab---python-basico-sebasnop\data.csv"
+REL_PATH = r"Python\lab---python-basico-sebasnop\data.csv"
 CLOUD_PATH = "/home/runner/work/lab---python-basico-sebasnop/lab---python-basico-sebasnop/data.csv"
 
 # Va a cambiar según donde se esté trabajando
@@ -82,7 +84,7 @@ def pregunta_02():
     conteo = Counter(primera_columna)
     conteo_lista = list(conteo.items())
 
-    sorted_conteo = sorted([fila for fila in conteo_lista], key=itemgetter(0))
+    sorted_conteo = sorted(conteo_lista, key=itemgetter(0))
 
     return sorted_conteo
 
@@ -115,13 +117,13 @@ def pregunta_03():
             diccionario_p3[clave].append(numero)
         else:
             diccionario_p3[clave] = [numero]
-    
+
     # Se asigna cada entrada del diccionario a donde debe estar
     for fila in columnas_1and2:
         agregar_diccionario_p3(fila)
 
     resultados = [(clave, sum(elementos)) for clave, elementos in diccionario_p3.items()]
-    sorted_resultados = sorted([tupla for tupla in resultados], key=itemgetter(0))
+    sorted_resultados = sorted(resultados, key=itemgetter(0))
 
     return sorted_resultados
 
@@ -151,13 +153,13 @@ def pregunta_04():
 
     # Columna de fechas YYYY-MM-DD
     columna_3 = [fila[2] for fila in data]
-    
+
     meses = [fecha.split('-')[1] for fecha in columna_3]
 
     conteo = Counter(meses)
     conteo_lista = list(conteo.items())
 
-    sorted_conteo = sorted([fila for fila in conteo_lista], key=itemgetter(0))
+    sorted_conteo = sorted(conteo_lista, key=itemgetter(0))
 
     return sorted_conteo
 
@@ -195,12 +197,14 @@ def pregunta_05():
                 diccionario_p5[clave][0] = numero
         else:
             diccionario_p5[clave] = [numero, numero]
-    
+
     for fila in columnas_1and2:
         verificar_diccionario_p5(fila)
 
-    resultados = [(clave, elementos[0], elementos[1]) for clave, elementos in diccionario_p5.items()]
-    sorted_resultados = sorted([tupla for tupla in resultados], key=itemgetter(0))
+    resultados = [(clave, elementos[0], elementos[1])
+                    for clave, elementos in diccionario_p5.items()]
+
+    sorted_resultados = sorted(resultados, key=itemgetter(0))
 
     return sorted_resultados
 
@@ -235,7 +239,8 @@ def pregunta_06():
 
     # Una fila estaba siendo ['jjj:12', 'bbb:3']
     # Un par estaba siendo 'jjj:12'
-    key_value_sep = [(par.split(":")[0], int(par.split(":")[1])) for fila in pares_sep for par in fila]
+    key_value_sep = [(par.split(":")[0], int(par.split(":")[1]))
+                    for fila in pares_sep for par in fila]
 
     # Tendrá la estructura "Letra": [min, max]
     diccionario_p6 = {}
@@ -250,8 +255,10 @@ def pregunta_06():
         else:
             diccionario_p6[letras] = [numero, numero]
 
-    resultados = [(clave, elementos[0], elementos[1]) for clave, elementos in diccionario_p6.items()]
-    sorted_resultados = sorted([tupla for tupla in resultados], key=itemgetter(0))
+    resultados = [(clave, elementos[0], elementos[1])
+                    for clave, elementos in diccionario_p6.items()]
+
+    sorted_resultados = sorted(resultados, key=itemgetter(0))
 
     return sorted_resultados
 
@@ -288,7 +295,7 @@ def pregunta_07():
             diccionario[numero] = [letra]
 
     resultados = [(clave, elementos) for clave, elementos in diccionario.items()]
-    sorted_resultados = sorted([tupla for tupla in resultados], key=itemgetter(0))
+    sorted_resultados = sorted(resultados, key=itemgetter(0))
 
     return sorted_resultados
 
@@ -325,10 +332,10 @@ def pregunta_08():
             diccionario[numero].append(letra)
         else:
             diccionario[numero] = [letra]
-    
+
     resultados = [(clave, sorted(elementos)) for clave, elementos in diccionario.items()]
 
-    sorted_resultados = sorted([tupla for tupla in resultados], key=itemgetter(0))
+    sorted_resultados = sorted(resultados, key=itemgetter(0))
 
     return sorted_resultados
 
@@ -353,7 +360,22 @@ def pregunta_09():
     }
 
     """
-    return 0
+
+    columna_5 = [fila[4] for fila in data]
+
+    # Pares nnn:000 separados
+    pares_sep = [fila.split(",") for fila in columna_5]
+
+    # Obtener solo las letras nnn de un par nnn:000
+    solo_letras = [par.split(":")[0] for fila in pares_sep for par in fila]
+
+    conteo = Counter(solo_letras)
+    conteo_lista = list(conteo.items())
+
+    sorted_conteo = sorted(conteo_lista, key=itemgetter(0))
+    conteo_diccionario = dict(sorted_conteo)
+
+    return conteo_diccionario
 
 
 def pregunta_10():
@@ -374,12 +396,21 @@ def pregunta_10():
 
 
     """
-    return 0
+
+    resultado = [
+        (
+            fila[0],
+            len(fila[3].split(",")),
+            len(fila[4].split(","))
+        )
+        for fila in data]
+
+    return resultado
 
 
 def pregunta_11():
     """
-    Retorne un diccionario que contengan la suma de la columna 2 para cada letra de la
+    Retorne un diccionario que contenga la suma de la columna 2 para cada letra de la
     columna 4, ordenadas alfabeticamente.
 
     Rta/
@@ -395,12 +426,31 @@ def pregunta_11():
 
 
     """
-    return 0
+
+    columnas_2and4 = [[int(fila[1]), fila[3].split(",")] for fila in data]
+
+    diccionario = {}
+
+    for fila in columnas_2and4:
+        numero = fila[0]
+
+        if numero != 0:
+            letras = fila[1]
+
+            for letra in letras:
+                if letra in diccionario:
+                    diccionario[letra] += numero
+                else:
+                    diccionario[letra] = numero
+
+    sorted_diccionario = dict(sorted(diccionario.items()))
+
+    return sorted_diccionario
 
 
 def pregunta_12():
     """
-    Genere un diccionario que contengan como clave la columna 1 y como valor la suma de
+    Genere un diccionario que contenga como clave la columna 1 y como valor la suma de
     los valores de la columna 5 sobre todo el archivo.
 
     Rta/
@@ -413,4 +463,23 @@ def pregunta_12():
     }
 
     """
-    return 0
+
+    columnas_1and5 = [[fila[0], fila[4].split(",")] for fila in data]
+
+    diccionario = {}
+
+    for fila in columnas_1and5:
+        letra = fila[0]
+        pares = fila[1]
+
+        numeros = [int(par.split(":")) for par in pares]
+        suma = sum(numeros)
+
+        if letra in diccionario:
+            diccionario[letra] += suma
+        else:
+            diccionario[letra] = suma
+
+    sorted_diccionario = dict(sorted(diccionario.items()))
+
+    return sorted_diccionario
