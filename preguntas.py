@@ -483,5 +483,3 @@ def pregunta_12():
     sorted_diccionario = dict(sorted(diccionario.items()))
 
     return sorted_diccionario
-
-print(pregunta_12())
