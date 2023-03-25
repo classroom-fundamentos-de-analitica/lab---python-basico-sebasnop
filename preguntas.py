@@ -295,7 +295,7 @@ def pregunta_07():
 
 def pregunta_08():
     """
-    Genere una lista de tuplas, donde el primer elemento de cada tupla contiene  el valor
+    Genere una lista de tuplas, donde el primer elemento de cada tupla contiene el valor
     de la segunda columna; la segunda parte de la tupla es una lista con las letras
     (ordenadas y sin repetir letra) de la primera  columna que aparecen asociadas a dicho
     valor de la segunda columna.
@@ -315,7 +315,22 @@ def pregunta_08():
     ]
 
     """
-    return 0
+
+    columnas_2and1 = {(int(fila[1]), fila[0]) for fila in data}
+
+    diccionario = {}
+
+    for numero, letra in columnas_2and1:
+        if numero in diccionario:
+            diccionario[numero].append(letra)
+        else:
+            diccionario[numero] = [letra]
+    
+    resultados = [(clave, sorted(elementos)) for clave, elementos in diccionario.items()]
+
+    sorted_resultados = sorted([tupla for tupla in resultados], key=itemgetter(0))
+
+    return sorted_resultados
 
 
 def pregunta_09():
